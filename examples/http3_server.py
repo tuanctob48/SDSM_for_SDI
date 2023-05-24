@@ -439,8 +439,8 @@ if __name__ == "__main__":
     if len(server_addr)!=2:
         print("You have to insert two addresses for the server, the one where it runs and the one to which it migrates")
         sys.exit()
-
-    f = open("/home/Trigger/src/aioquic/quic/MigrationInformation.txt", "a") #CHANGE PATH #/home/Trigger_v4/
+#ssh://server_one/home/osboxes/aioquic-explicit_UniPisa/MigrationInformation.txt
+    f = open("/home/osboxes/aioquic-explicit_UniPisa/MigrationInformation.txt", "a") #CHANGE PATH #/home/Trigger_v4/
     f.write(str(args.migration_type)+"\n")
     f.write(server_addr[0]+"\n")
     f.write(server_addr[1]+"\n")

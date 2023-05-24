@@ -12,6 +12,10 @@ from threading import Thread #this is used to launch the thread for wifi handoff
 from coapthon.client.helperclient import HelperClient #used to launch the CoAP client for Wi-Fi Handoff
 import random #for wifi handover timing
 
+#CoAP Nested Server for handling remote connection migration to client side
+from coapthon.server.coap import CoAP
+from coapthon.resources.resource import Resource
+
 from collections import deque
 from typing import Callable, Deque, Dict, List, Optional, Union, cast
 from urllib.parse import urlparse
@@ -119,6 +123,35 @@ class WebSocket:
     def websocket_event_received(self, event: wsproto.events.Event) -> None:
         if isinstance(event, wsproto.events.TextMessage):
             self.queue.put_nowait(event.data)
+
+class RemoteConnectionMigration(Resource):
+    def __init__(self, name="RemoteConnectionMigration", coap_server=None):
+        super(BasicResource, self).__init__(name, coap_server, visible=True,observable=True, allow_children=True)
+        self.payload = "Remote Connection Migration"
+
+    def render_GET(self, request):
+        return self
+
+    def render_PUT(self, request):
+        info = request.payload
+        # run_command(info)
+        self.payload = "OK"
+        return self
+
+    def render_POST(self, request):
+        res = RemoteConnectionMigration()
+        res.location_query = request.uri_query
+        res.payload = request.payload
+        return res
+
+    def render_DELETE(self, request):
+        return True
+
+
+class CoAPNestedServer(CoAP):
+    def __init__(self, host, port):
+        CoAP.__init__(self, (host, port))
+        self.add_resource('remoteconnectionmigration/', RemoteConnectionMigration())
 
 
 class HttpClient(QuicConnectionProtocol):
@@ -369,8 +402,8 @@ async def run(
             have_delay = False #boolean that tells if the current request has exceeded the scheduled starting time, i.e., t > i*T
             coap_server = ["192.168.2.76","192.168.3.76"]
             access_points = ["oem-default-string-2 ","oem-default-string-1 "]
-
-            with open('/home/ServiceLatency.csv', 'a') as csvfile:
+#ssh://server_one/home/osboxes/aioquic-explicit_UniPisa/MigrationInformation.txt
+            with open('/home/osboxes/aioquic-explicit_UniPisa/ServiceLatency.csv', 'a') as csvfile:
                 spamwriter = csv.writer(csvfile, delimiter=';', quotechar='|', quoting=csv.QUOTE_MINIMAL)
                 spamwriter.writerow(["REQ", "LATENCY"])
             
@@ -420,7 +453,7 @@ async def run(
 
                 ##################### write service latency for current request to csv file ##########################
 
-                with open('/home/ServiceLatency.csv', 'a') as csvfile:
+                with open('/home/osboxes/aioquic-explicit_UniPisa/ServiceLatency.csv', 'a') as csvfile:
                     spamwriter = csv.writer(csvfile, delimiter=';', quotechar='|', quoting=csv.QUOTE_MINIMAL)
                     spamwriter.writerow([str(cont), str(elapsed_time)])
 

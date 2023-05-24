@@ -762,7 +762,7 @@ class QuicConnection:
         # stop handling packets when closing
         if self._state in END_STATES:
             return
-
+        print("RECEIVED DATAGRAM")
         '''
         print("PROCESS REGULAR PACKET FROM ") #DEBUG*
         print(addr)
@@ -785,8 +785,9 @@ class QuicConnection:
         #PERF EV TIME INFO****
 
         #PERF EV AUTOMATION V2*****     DEBUG V3********
-        if not self._is_client and self._migration_type == -1 and len(self._list_addr_server) == 0: 
-            f = open("/home/Trigger/src/aioquic/quic/MigrationInformation.txt", "r+") #/home/Trigger_v4/
+        if not self._is_client and self._migration_type == -1 and len(self._list_addr_server) == 0:
+            print("READING SERVER INFO")
+            f = open("/home/osboxes/aioquic-explicit_UniPisa/MigrationInformation.txt", "r+") #/home/Trigger_v4/
             lines = f.readlines()
             c_line = 0
             for linefull in lines:

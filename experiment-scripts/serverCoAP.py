@@ -1,13 +1,12 @@
 from coapthon.server.coap import CoAP
-from coapthon.exampleresources import BasicResource
 from coapthon.resources.resource import Resource
 import os
 import time
 
 
 def run_command(mtype:int, dest_addr:str) -> None:
-
-    command = "python /home/oem/master/migrate_from_shell.py python_bundle " + dest_addr
+#ssh://server_one/home/osboxes/aioquic-explicit_UniPisa/experiment-scripts/migrate-server-console.py
+    command = "python /home/osboxes/aioquic-explicit_UniPisa/experiment-scripts/migrate_from_shell.py python_bundle " + dest_addr
     if(mtype == 0):
         command = command + " false false"  #cold migration
     elif(mtype == 1):

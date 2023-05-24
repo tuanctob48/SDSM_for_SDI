@@ -12,7 +12,7 @@ import distutils.util
 
 
 def error():
-    print "Something did not work. Exiting!"
+    print("Something did not work. Exiting!")
     sys.exit(1)
 
 def prepare(image_path, parent_path):
@@ -31,7 +31,7 @@ def pre_dump(base_path, container):
     cmd = 'time -p runc checkpoint  --pre-dump --image-path parent'
     cmd += ' ' + container
     start = time.time()
-    print "Starting checkpointing pre-dump at: %f" % (start) 
+    print ("Starting checkpointing pre-dump at: %f" % (start) )
     ret = os.system(cmd)
     #end = time.time()
     #print "%s finished after %d second(s) with %d" % (cmd, end - start, ret)
@@ -57,20 +57,20 @@ def real_dump(precopy, postcopy):
         cmd += ' --status-fd /tmp/postcopy-pipe'
     cmd += ' ' + container
     start = time.time()
-    print "Starting checkpointing dump at: %f" % (start)
-    print cmd
+    print ("Starting checkpointing dump at: %f" % (start))
+    print (cmd)
     p = subprocess.Popen(cmd, shell=True)
     if postcopy:
         p_pipe = os.open('/tmp/postcopy-pipe', os.O_RDONLY)
         ret = os.read(p_pipe, 1)
         if ret == '\0':
-            print 'Ready for lazy page transfer'
+            print ('Ready for lazy page transfer')
         ret = 0
     else:
         ret = p.wait()
 
     end = time.time()
-    print "%s finished after %.2f second(s) with %d" % (cmd, end - start, ret)
+    print ("%s finished after %.2f second(s) with %d" % (cmd, end - start, ret))
     os.chdir(old_cwd)
     if ret != 0:
         error()
@@ -81,7 +81,7 @@ def xfer_pre_dump(parent_path, dest, base_path):
     cmd = 'du -hs %s' % parent_path
     ret = os.system(cmd)
     cmd = 'time -p rsync %s --stats %s %s:%s/' % (rsync_opts, parent_path, dest, base_path)
-    print "Transferring PRE-DUMP to %s" % dest
+    print ("Transferring PRE-DUMP to %s" % dest)
     #start = time.time()
     ret = os.system(cmd)
     #end = time.time()
@@ -95,7 +95,7 @@ def xfer_final(image_path, dest, base_path):
     cmd = 'du -hs %s' % image_path
     ret = os.system(cmd)
     cmd = 'time -p rsync %s --stats %s %s:%s/' % (rsync_opts, image_path, dest, base_path)
-    print "Transferring DUMP to %s" % dest
+    print ("Transferring DUMP to %s" % dest)
     #start = time.time()
     ret = os.system(cmd)
     #end = time.time()
@@ -144,9 +144,9 @@ def migrate(container, dest, pre, lazy):
 
         for s in inputready:
              answer = s.recv(1024)
-             print answer
+             print (answer)
 
-    print "Migrate function in migrate_from_shell is returning"
+    print ("Migrate function in migrate_from_shell is returning")
     return True
     
     
@@ -194,4 +194,4 @@ if __name__ == '__main__':
     migrate(container, dest, pre, lazy)
     #remove_directories(container, pre)
 
-    print "Exiting migrate_from_shell"
+    print ("Exiting migrate_from_shell")
