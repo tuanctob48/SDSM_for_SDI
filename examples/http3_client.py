@@ -12,6 +12,7 @@ from threading import Thread #this is used to launch the thread for wifi handoff
 from coapthon.client.helperclient import HelperClient #used to launch the CoAP client for Wi-Fi Handoff
 import random #for wifi handover timing
 
+import multiprocessing as mp
 #CoAP Nested Server for handling remote connection migration to client side
 from coapthon.server.coap import CoAP
 from coapthon.resources.resource import Resource
@@ -123,36 +124,6 @@ class WebSocket:
     def websocket_event_received(self, event: wsproto.events.Event) -> None:
         if isinstance(event, wsproto.events.TextMessage):
             self.queue.put_nowait(event.data)
-
-class RemoteConnectionMigration(Resource):
-    def __init__(self, name="RemoteConnectionMigration", coap_server=None):
-        super(BasicResource, self).__init__(name, coap_server, visible=True,observable=True, allow_children=True)
-        self.payload = "Remote Connection Migration"
-
-    def render_GET(self, request):
-        return self
-
-    def render_PUT(self, request):
-        info = request.payload
-        # run_command(info)
-        self.payload = "OK"
-        return self
-
-    def render_POST(self, request):
-        res = RemoteConnectionMigration()
-        res.location_query = request.uri_query
-        res.payload = request.payload
-        return res
-
-    def render_DELETE(self, request):
-        return True
-
-
-class CoAPNestedServer(CoAP):
-    def __init__(self, host, port):
-        CoAP.__init__(self, (host, port))
-        self.add_resource('remoteconnectionmigration/', RemoteConnectionMigration())
-
 
 class HttpClient(QuicConnectionProtocol):
     def __init__(self, *args, **kwargs) -> None:
@@ -408,7 +379,11 @@ async def run(
                 spamwriter.writerow(["REQ", "LATENCY"])
             
             #diff_timestamp=0 #DEBUG V4*
-            
+            clientsideIPQueue = mp.Queue() #create the clientside IP Monitoring Queue
+            clientsideIPThread = Thread(target=startCoAPServer, args=(clientsideIPQueue,))
+            clientsideIPThread.start()
+            clientsideIPMonitoringThread = Thread(target=monitoringRemoteConnectionMigration, args=(clientsideIPQueue, client))
+            clientsideIPMonitoringThread.start()
             while(cont < n_requests):  #DEBUG V2
 
                 print("NUMBER REQUEST --> " + str(cont))
@@ -464,9 +439,12 @@ async def run(
                     #wait a random time between 0 and 1s before triggering handover
                     waiting = random.uniform(0,1)
                     time.sleep(waiting)
-                    t1 = Thread(target=clientCoAP, args=(coap_server[0],access_points[0],))
-                    t1.start()
-
+                    # t1 = Thread(target=clientCoAP, args=(coap_server[0],access_points[0],))
+                    # t1.start()
+                    list_addr_server = ["192.168.56.8","192.168.56.7"]
+                    # t1 = Thread(target=remoteClientCoAP, args=(0,list_addr_server,))
+                    # t1.start()
+                    # remoteClientCoAP(0,list_addr_server)
                     #update order of access points
                     access_points = list(reversed(access_points))
                     coap_server = list(reversed(coap_server))
@@ -515,7 +493,78 @@ def clientCoAP(coapserver: str,accesspoint: str) -> None:
     except Exception as e:
         print("Could not change access point: " +e)
 
+def remoteClientCoAP(mtype: int, list_addr_server) -> None:
+
+    print("Before connecting to CoAP source server")
+    client = HelperClient(server=(list_addr_server[0], 5683))
+    print("After connecting to CoAP source server")
+    request = str(mtype) + ","+str(list_addr_server[0])+","+str(list_addr_server[1])
+    print(request)
+    
+    response = client.put("basic",request)
+    print("Received response from CoAP at source server")
+    print(response.pretty_print())
+    
+    client.stop()
+
 #CARLO ***** METHOD TO PERFORM WIFI HANDOVER
+
+class NestedCoAPServer(CoAP):
+    def __init__(self, host, port, queue):
+        CoAP.__init__(self, (host, port))
+        self.queue = queue
+        self.add_resource('remoteconnectionmigration/', RemoteConnectionMigration(self.queue))
+
+class RemoteConnectionMigration(Resource):
+    def __init__(self, name="RemoteConnectionMigration", coap_server=None, queue=None):
+        super(RemoteConnectionMigration, self).__init__(name, coap_server, visible=True,observable=True, allow_children=True)
+        self.payload = "Remote Connection Migration"
+        self.queue = queue
+    def render_GET(self, request):
+        return self
+
+    def render_PUT(self, request):
+        newIP = request.payload
+        # run_command(info)
+        self.queue.put(newIP)
+        self.payload = "OK"
+        return self
+
+    def render_POST(self, request):
+        res = RemoteConnectionMigration()
+        res.location_query = request.uri_query
+        res.payload = request.payload
+        return res
+
+    def render_DELETE(self, request):
+        return True
+
+def startCoAPServer(queue: mp.Queue) -> None:
+    try:
+        server = NestedCoAPServer("0.0.0.0", 6365, queue)
+        print("After CoAP Nested server declaration")
+    except Exception as e:
+        print(e)
+    try:
+        print("Before server listens")
+        server.listen(10)
+        print("After server listens")
+    except Exception as e:
+        print(e)
+    except KeyboardInterrupt:
+        print("Server Shutdown")
+        server.close()
+        print("Exiting...")
+
+def monitoringRemoteConnectionMigration(queue: mp.Queue, client: HttpClient) -> None:
+    while True:
+        newPrimaryIP = queue.get()
+        if newPrimaryIP:
+            print("received new IP address",newPrimaryIP)
+            network_path = client._find_network_path(newPrimaryIP)
+            client._network_paths.pop()
+            client._network_paths.insert(0, network_path) #set to primary
+
 
 if __name__ == "__main__":
     defaults = QuicConfiguration(is_client=True)

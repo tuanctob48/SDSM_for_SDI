@@ -207,7 +207,7 @@ END_STATES = frozenset(
 def clientCoAP(mtype: int, list_addr_server) -> None:
 
     print("Before connecting to CoAP server")
-    client = HelperClient(server=(list_addr_server[1], 5683))
+    client = HelperClient(server=(list_addr_server[0], 5683))
     print("After connecting to CoAP server")
     request = str(mtype) + ","+str(list_addr_server[0])+","+str(list_addr_server[1])
     print(request)
@@ -762,8 +762,7 @@ class QuicConnection:
         # stop handling packets when closing
         if self._state in END_STATES:
             return
-        print("RECEIVED A DATAGRAM")
-
+        print("RECEIVED DATAGRAM")
         '''
         print("PROCESS REGULAR PACKET FROM ") #DEBUG*
         print(addr)
@@ -787,8 +786,8 @@ class QuicConnection:
 
         #PERF EV AUTOMATION V2*****     DEBUG V3********
         if not self._is_client and self._migration_type == -1 and len(self._list_addr_server) == 0:
-            print("READING Server info")
-            f = open("/home/osboxes/aioquic-explicit_UniPisa/src/aioquic/quic/MigrationInformation.txt", "r+") #/home/Trigger_v4/
+            print("READING SERVER INFO")
+            f = open("/home/osboxes/aioquic-explicit_UniPisa/MigrationInformation.txt", "r+") #/home/Trigger_v4/
             lines = f.readlines()
             c_line = 0
             for linefull in lines:

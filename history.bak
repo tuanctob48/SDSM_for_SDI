@@ -1,0 +1,550 @@
+    1  sudo apt-get install org
+    2  sudo apt-get install xorg
+    3  sudo apt-get install openbox
+    4  ip a
+    5  sudo dhclient -v
+    6  ip a
+    7  sudo restart
+    8  sudo reboot
+    9  wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
+   10  ls
+   11  chmod +x Miniconda3-latest-Linux-x86_64.sh 
+   12  sudo ./Miniconda3-latest-Linux-x86_64.sh 
+   13  exit
+   14  ls
+   15  vim env.yml
+   16  conda env create -n connection_migration --file env.yml
+   17  ls
+   18  conda env create -n connection_migration --file env.yml
+   19  sudo ls -la 
+   20  ls -la
+   21  conda install conda-clean
+   22  sudo conda install conda-clean
+   23  conda install conda-clean
+   24  sudo rm -rf miniconda3/
+   25  sudo rm -rf .conda/
+   26  ./Miniconda3-latest-Linux-x86_64.sh 
+   27  exit
+   28  ls
+   29  sudo mount /dev/cdrom /media/cdrom
+   30  cd /dev/
+   31  ls
+   32  cd cdrom
+   33  mkdir /media/cdrom
+   34  sudo mkdir /media/cdrom
+   35  sudo mount /dev/cdrom /media/cdrom
+   36  cd /media/cdrom/
+   37  ls
+   38  sudo apt-get install -y dkms build-essential linux-headers-generic linux-headers-$(uname -r)
+   39  sudo ./VBoxLinuxAdditions.run 
+   40  reboot
+   41  sudo dhclient -v
+   42  sudo vim /etc/network/interfaces 
+   43  sudo systemctl status systemd-networkd
+   44  sudo vim /etc/systemd/network/
+   45  sudo vim /etc/systemcd/network/20-dhcp.network
+   46  cd /etc/systemd/network/
+   47  ls
+   48  sudo vim 20-dhcp.network
+   49  reboot
+   50  ls
+   51  git clone https://github.com/kruviser/aioquic-explicit_UniPisa
+   52  ls
+   53  clear
+   54  ls
+   55  clear
+   56  ls
+   57  clear
+   58  ls
+   59  cd aioquic-explicit_UniPisa/
+   60  ls
+   61  ip a
+   62  ping 192.168.56.1
+   63  ping 192.168.57.1
+   64  ip a
+   65  clear
+   66  ls
+   67  cd aioquic-explicit_UniPisa/
+   68  ls
+   69  ip a
+   70  shutdown
+   71  shutdown -c
+   72  shutodwn 0
+   73  shutdown -h 0
+   74  ip a
+   75  sudo vim 20-dhcp.network
+   76  cd /etc/network
+   77  ls
+   78  vim if-up.d/
+   79  ls
+   80  cd if-pre-up.d/
+   81  ls
+   82  cd ../
+   83  vim interfaces 
+   84  vim /etc/netplan/
+   85  ip a
+   86  vim /etc/netplan/
+   87  sudo vim /etc/netplan/00-installer-config.yaml 
+   88  restart
+   89  reboot
+   90  ip a
+   91  sudo dhclient -v
+   92  ip a
+   93  sudo vim /etc/netplan/00-installer-config.yaml 
+   94  sudo dhclient -v
+   95  ip a
+   96  reboot
+   97  sudo apt install runc
+   98  runc spec
+   99  sudo runc start node4_re[;
+  100  sudo runc start node4_repl
+  101  runc checkpoint --pre-dump --image-path parent
+  102  python aioquic-explicit_UniPisa/experiment-scripts/migratepython_bundle 192.168.56.5
+  103  python aioquic-explicit_UniPisa/experiment-scripts/migrate_from_shell.py python_bundle false false
+  104  crui -V
+  105  criu -V
+  106  ls
+  107  cd aioquic-explicit_UniPisa/
+  108  ls
+  109  cd experiment-scripts/
+  110  ls
+  111  migrate_from_shell.py
+  112  python migrate_from_shell.py
+  113  vim migrate_from_shell.py 
+  114  python migrate_from_shell.py
+  115  vim migrate_from_shell.py 
+  116  python migrate_from_shell.py
+  117  vim migrate_from_shell.py 
+  118  python migrate_from_shell.py
+  119  python migrate_from_shell.py test 123
+  120  cd ../../
+  121  ls
+  122  mkdir -p ./rootfs
+  123  tar -xf rootfs.tar -C ./rootfs/
+  124  cd rootfs/
+  125  runc spec
+  126  sudo runc run node4
+  127  cd ../
+  128  sudo runc run node4
+  129  ip a
+  130  ping 192.168.56.1
+  131  ssh tuanctob48@192.168.56.1
+  132  ls
+  133  cd aioquic-explicit_UniPisa/
+  134  ls
+  135  python experiment-scripts/serverCoAP.py 
+  136  ip a
+  137  python experiment-scripts/serverCoAP.py 
+  138  ls
+  139  subl
+  140  pkill -9 subl
+  141  exit
+  142  ls
+  143  subl
+  144  cd aioquic-explicit_UniPisa/
+  145  python experiment-scripts/serverCoAP.py 
+  146  sudo apt-get install libseccomp-dev
+  147  go
+  148  cd
+  149  wget https://go.dev/dl/go1.19.9.linux-amd64.tar.gz
+  150  rm -rf /usr/local/go && tar -C /usr/local -xzf go1.19.9.linux-amd64.tar.gz go/
+  151  sudo rm -rf /usr/local/go && tar -C /usr/local -xzf go1.19.9.linux-amd64.tar.gz go/
+  152  sudo rm -rf /usr/local/go && sudo tar -C /usr/local -xzf go1.19.9.linux-amd64.tar.gz go/
+  153  vim ~/.bashrc 
+  154  exit
+  155  ls
+  156  runc run -d --console-socket /runc/containers/python_bundle/console.sock python_bundle
+  157  sudo runc run -d --console-socket /runc/containers/python_bundle/console.sock python_bundle
+  158  ls
+  159  runc list
+  160  runc images
+  161  runc 
+  162  runc run -d --console-socket /runc/containers/python_bundle/console.sock python_bundle
+  163  runc ps
+  164  runc run -d --console-socket /runc/containers/python_bundle/console.sock python_bundle
+  165  sudo runc run -d --console-socket /runc/containers/python_bundle/console.sock python_bundle
+  166  sudo runc list
+  167  run c
+  168  runc
+  169  sudo runc exec
+  170  sudo runc exec python_bundle bash
+  171  sudo runc exec python_bundle sh
+  172  sudo runc exec python_bundle bash
+  173  sudo runc exec python_bundle sh
+  174  ls
+  175  cd go/
+  176  ls
+  177  cd bin/
+  178  ls
+  179  cd ../
+  180  ls
+  181  cd src/
+  182  ls
+  183  cd runc/
+  184  ls
+  185  cd contrib/cmd/recvtty/
+  186  ls
+  187  go run recvtty.go 
+  188  ls
+  189  go build
+  190  ls
+  191  ./recvtty /runc/containers/node4/rootfs/console.sock
+  192  cd /runc/containers/node4/rootfs/
+  193  ls
+  194  runc run -d --console-socket /runc/containers/node4/rootfs/console.sock 
+  195  runc run -d --console-socket /runc/containers/node4/rootfs/console.sock node4
+  196  ls
+  197  ip a
+  198  cd /runc/containers/python_bundle/
+  199  ls
+  200  cd $GOPATH
+  201  ls
+  202  go get github.com/opencontainers/runtime-tools
+  203  ls
+  204  go install github.com/opencontainers/runtime-tools
+  205  go install github.com/opencontainers/runtime-tools@latest
+  206  go install github.com/opencontainers/runtime-tools@main
+  207  go get github.com/opencontainers/runtime-tools
+  208  go install github.com/opencontainers/runtime-tools
+  209  go install github.com/opencontainers/runtime-tools@latest
+  210  cd src/
+  211  ls
+  212  cd ../
+  213  cd bin/
+  214  ls
+  215  cd ../
+  216  cd
+  217  mkdir runtime-tools
+  218  cd runtime-tools/
+  219  ls
+  220  go mod init github.com/opencontainers/runtime-tools@latest
+  221  go mod init github.com/opencontainers/runtime-tools
+  222  go get github.com/opencontainers/runtime-tools@latest
+  223  go get github.com/opencontainers/runtime-tools
+  224  go install github.com/opencontainers/runtime-tools
+  225  go get github.com/opencontainers/runtime-tools
+  226  go get -u github.com/opencontainers/runtime-tools
+  227  vim go.mod
+  228  go get -u github.com/opencontainers/runtime-tools
+  229  go install github.com/opencontainers/runtime-tools
+  230  go get -u github.com/opencontainers/runtime-tools
+  231  vim go.mod
+  232  rm go.mod 
+  233  go mod init
+  234  go mod init github.com/opencontainers/runtime-tools
+  235  ls
+  236  vim go.mod 
+  237  go get -u github.com/opencontainers/runtime-tools
+  238  udo runc exec python_bundle sh
+  239  sudo runc exec python_bundle sh
+  240  sudo runc start python_bundle
+  241  sudo runc list
+  242  sudo runc kill python_bundle
+  243  sudo runc start python_bundle
+  244  runc --help
+  245  sudo runc kill python_bundle
+  246  sudo runc list
+  247  sudo runc exec python_bundle sh
+  248  sudo runc list
+  249  sudo runc kill -9 python_bundle
+  250  sudo runc kill python_bundle KILL
+  251  sudo runc list
+  252  sudo runc start python_bundle
+  253  sudo runc delete python_bundle
+  254  sudo runc list
+  255  cd
+  256  ls
+  257  vim config.json 
+  258  cd go/src/runc/contrib/cmd/recvtty/
+  259  ls
+  260  ls /runc/containers/python_bundle/
+  261  ls
+  262  ls /runc/containers/python_bundle/
+  263  cd
+  264  /home/osboxes/go/src/github.com/opencontainers/runc/contrib/cmd/recvtty/recvtty /runc/containers/python_bundle/console.sock
+  265  /home/osboxes/go/src/runc/contrib/cmd/recvtty/recvtty /runc/containers/python_bundle/console.sock
+  266  sudo /home/osboxes/go/src/runc/contrib/cmd/recvtty/recvtty /runc/containers/python_bundle/console.sock
+  267  sudo /home/osboxes/go/src/runc/contrib/cmd/recvtty/recvtty /runc/containers/python_bundle/console.sock &
+  268  sudo pkil console.sock
+  269  sudo pkill console.sock
+  270  sudo /home/osboxes/go/src/runc/contrib/cmd/recvtty/recvtty /runc/containers/python_bundle/console.sock &
+  271  runc run -d --console-socket /runc/containers/python_bundle/console.sock python_bundle
+  272  sudo runc run -d --console-socket /runc/containers/python_bundle/console.sock python_bundle
+  273  shutdown
+  274  halt 0
+  275  halt
+  276  reboot
+  277  sudo reboot
+  278  ls
+  279  cd rootfs/
+  280  ls
+  281  vim config.json 
+  282  runc run test
+  283  cd ../
+  284  runc run test
+  285  sudo runc run test
+  286  runc run -d --console-socket /runc/containers/python_bundle/console.sock python_bundle
+  287  sudo runc run -d --console-socket /runc/containers/python_bundle/console.sock python_bundle
+  288  ls
+  289  cd /runc/
+  290  ls
+  291  cd containers/
+  292  ls
+  293  mkdir python_bundle
+  294  sudo mkdir python_bundle
+  295  cd
+  296  sudo ~/go/src/runc/contrib/cmd/recvtty/recvtty /runc/containers/python_bundle/console.sock
+  297  sudo apt-get install ca-certificates curl gnupg
+  298  sudo install -m 0755 -d /etc/apt/keyrings
+  299  echo   "deb [arch="$(dpkg --print-architecture)" signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
+  300    "$(. /etc/os-release && echo "$VERSION_CODENAME")" stable" |   sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+  301  sudo apt-get update
+  302  mkdir -p python_bundle/rootfs/
+  303  ls
+  304  cd python_bundle/
+  305  ls
+  306  cd rootfs/
+  307  ls
+  308  cd ../../
+  309  cd python_bundle/
+  310  docker export $(docker run -d rackspacedot/python37) |tar -C rootfs -xv
+  311  docker export $(docker run -d rackspacedot/python37) | tar -C rootfs -xv
+  312  docker export $(docker run -d rackspacedot/python37) |tar -C rootfs -xv
+  313  docker export $(docker run -d rackspacedot/python37) | tar -C rootfs -xv
+  314  reboot
+  315  sudo reboot
+  316  sudo ~/go/src/runc/contrib/cmd/recvtty/recvtty /runc/containers/python_bundle/console.sock &
+  317  sudo runc run -d --console-socket /runc/containers/python_bundle/console.sock python_bundle
+  318  runc run -d python_bundle
+  319  sudo runc run -d python_bundle
+  320  sudo runc run python_bundle
+  321  runc delete python_bundle
+  322  sudo runc delete python_bundle
+  323  sudo runc list
+  324  cd 
+  325  ls
+  326  mv config.json /
+  327  sudo mv config.json /
+  328  cd .
+  329  cd /
+  330  ls
+  331  sudo runc run python_bundle
+  332  sudo vim config.json 
+  333  sudo runc run python_bundle
+  334  sudo rm config.json 
+  335  cd
+  336  ls
+  337  cd rootfs/
+  338  ls
+  339  vim config.json 
+  340  ls
+  341  sudo runc run python_bundle
+  342  cd ../
+  343  sudo runc run python_bundle
+  344  mv rootfs/config.json ./
+  345  sudo runc run python_bundle
+  346  $ mkdir -p python_bundle/rootfs
+  347  cd python_bundle/
+  348  docker export $(docker run -d rackspacedot/python37) |tar -C rootfs -xv
+  349  docker
+  350  sudo apt-get update
+  351  ip a
+  352  cd python_bundle/
+  353  docker export $(docker run -d rackspacedot/python37) |tar -C rootfs -xv
+  354  /home/osboxes/go/src/runc/contrib/cmd/recvtty/recvtty /runc/containers/python_bundle/console.sock
+  355  sudo /home/osboxes/go/src/runc/contrib/cmd/recvtty/recvtty /runc/containers/python_bundle/console.sock
+  356  htop
+  357  sudo pkill -9 recvtty
+  358  sudo /home/osboxes/go/src/runc/contrib/cmd/recvtty/recvtty /runc/containers/python_bundle/console.sock
+  359  sudo netstat -ntp
+  360  sudo nestat -ptna
+  361  sudo netstat -ptna
+  362  ip a
+  363  ls
+  364  cd rootfs/
+  365  ls
+  366  cd ../
+  367  vim config.json
+  368  runc run python_bundle
+  369  sudo runc run python_bundle
+  370  cd rootfs/
+  371  ls
+  372  pwd
+  373  cd home/
+  374  ls
+  375  pwd
+  376  mkdir aioquic-explicit_UniPisa
+  377  ls
+  378  cd aioquic-explicit_UniPisa/
+  379  ls
+  380  pwd
+  381  ls
+  382  cd ../../
+  383  ls
+  384  cd ../
+  385  ls
+  386  cd ../
+  387  ls
+  388  cp aioquic-explicit_UniPisa/ python_bundle/rootfs/home/
+  389  cp -r aioquic-explicit_UniPisa/ python_bundle/rootfs/home/
+  390  cd python_bundle/rootfs/home/aioquic-explicit_UniPisa/
+  391  ls
+  392  cd ../
+  393  ls
+  394  cd ../
+  395  vim config.json 
+  396  pwd
+  397  cd rootfs/
+  398  ls
+  399  cd home/
+  400  ls
+  401  vim aioquic-explicit_UniPisa/
+  402  cd ../../
+  403  vim config.json 
+  404  /home/osboxes/go/src/runc/contrib/cmd/recvtty/recvtty /runc/containers/python_bundle/console.sock
+  405  runc run python_bundle
+  406  sudo runc run python_bundle
+  407  sudo runc exec  python_bundle sh
+  408  ls
+  409  cat config.json 
+  410  sudo runc list
+  411  sudo runc run python_bundle
+  412  vim config.json 
+  413  ls
+  414  chroot rootfs/
+  415  sudo chroot rootfs/
+  416  vim config.json 
+  417  cp config.json ../
+  418  vim config.json 
+  419  sudo runc run python_bundle
+  420  vim config.json 
+  421  sudo runc run python_bundle
+  422  runc list
+  423  sudo runc list
+  424  sudo runc run python_bundle
+  425  ls
+  426  cd rootfs/
+  427  ls
+  428  vim home/.bashrc
+  429  ls
+  430  cd ../
+  431  ls
+  432  rm rootfs/
+  433  sudo rm -rf rootfs/
+  434  ls
+  435  df
+  436  ls
+  437  cd ../
+  438  ls
+  439  rm rootfs.tar 
+  440  rm go1.19.9.linux-amd64.tar.gz 
+  441  ls
+  442  rm -rf rootfs/
+  443  ls
+  444  rm Miniconda3-latest-Linux-x86_64.sh 
+  445  ls
+  446  cd ../../
+  447  ls
+  448  sudo apt-get autoremove
+  449  ls
+  450  cd
+  451  ls
+  452  cd python_bundle/
+  453  ls
+  454  mkdir rootfs
+  455  cp -r /* rootfs/
+  456  sudo cp -r /* rootfs/
+  457  ls
+  458  cd aioquic-explicit_UniPisa/
+  459  python3 examples/http3_client.py --ca-certs tests/pycacert.pem https://192.168.56.8:4433 --handle_migration_strategy 1 --n_requests 10 --migration_enabled 1 --n_request_handover 1 --n_request_migration 2 --interval_migration 1 --request_type 1 --request_interval 1
+  460  ip a
+  461  ping 192.168.56.8
+  462  python3 examples/http3_client.py --ca-certs tests/pycacert.pem https://192.168.56.8:4433 --handle_migration_strategy 1 --n_requests 10 --migration_enabled 1 --n_request_handover 1 --n_request_migration 2 --interval_migration 1 --request_type 1 --request_interval 1
+  463  ip a
+  464  ping 192.168.56.8
+  465  python3 examples/http3_client.py --ca-certs tests/pycacert.pem https://192.168.56.8:4433 --handle_migration_strategy 1 --n_requests 10 --migration_enabled 1 --n_request_handover 1 --n_request_migration 2 --interval_migration 1 --request_type 1 --request_interval 1
+  466  ls
+  467  vim /runc/containers/python_bundle/rootfs/home/osboxes/aio_quic_sdn_ccm/src/aioquic/quic/connection.py 
+  468  ip a
+  469  python3 examples/http3_client.py --ca-certs tests/pycacert.pem https://192.168.56.8:4433 --handle_migration_strategy 1 --n_requests 10 --migration_enabled 1 --n_request_handover 1 --n_request_migration 2 --interval_migration 1 --request_type 1 --request_interval 1
+  470  ip a
+  471  python3 examples/http3_client.py --ca-certs tests/pycacert.pem https://192.168.56.8:4433 --handle_migration_strategy 1 --n_requests 10 --migration_enabled 1 --n_request_handover 1 --n_request_migration 2 --interval_migration 1 --request_type 1 --request_interval 1
+  472  ping 192.168.56.8
+  473  python3 examples/http3_client.py --ca-certs tests/pycacert.pem https://192.168.56.8:4433 --handle_migration_strategy 1 --n_requests 10 --migration_enabled 1 --n_request_handover 1 --n_request_migration 2 --interval_migration 1 --request_type 1 --request_interval 1
+  474  ls -la
+  475  cd ../
+  476  ls
+  477  ip a
+  478  python3 examples/http3_client.py --ca-certs tests/pycacert.pem https://192.168.56.8:4433 --handle_migration_strategy 1 --n_requests 10 --migration_enabled 1 --n_request_handover 1 --n_request_migration 2 --interval_migration 1 --request_type 1 --request_interval 1
+  479  ip a
+  480  cd aioquic-explicit_UniPisa/
+  481  ls
+  482  python3 examples/http3_client.py --ca-certs tests/pycacert.pem https://192.168.56.8:4433 --handle_migration_strategy 1 --n_requests 10 --migration_enabled 1 --n_request_handover 1 --n_request_migration 2 --interval_migration 1 --request_type 1 --request_interval 1
+  483  ls
+  484  cd /usr/local/lib/python3.6/dist-packages/
+  485  ls
+  486  cd
+  487  cd aioquic-explicit_UniPisa/
+  488  ls
+  489  python setup.py install
+  490  cd /home/osboxes/miniconda3/envs/connection_migration/lib/python3.8/site-packages
+  491  ls
+  492  cd aioquic-0.9.6-py3.8-linux-x86_64.egg/
+  493  ls
+  494  cd aioquic/
+  495  ls
+  496  cd quic/
+  497  ls
+  498  cd ../
+  499  ls
+  500  pwd
+  501  cd aioquic-explicit_UniPisa/
+  502  ls
+  503  python3 examples/http3_client.py --ca-certs tests/pycacert.pem https://192.168.56.8:4433 --handle_migration_strategy 1 --n_requests 10 --migration_enabled 1 --n_request_handover 1 --n_request_migration 2 --interval_migration 1 --request_type 1 --request_interval 1
+  504  sudo vim /usr/local/lib/python3.6/dist-packages/
+  505  vim miniconda3/envs/connection_migration/lib/python3.8/
+  506  cd aioquic-explicit_UniPisa/
+  507  python3 examples/http3_client.py --ca-certs tests/pycacert.pem https://192.168.56.8:4433 --handle_migration_strategy 1 --n_requests 10 --migration_enabled 1 --n_request_handover 1 --n_request_migration 2 --interval_migration 1 --request_type 1 --request_interval 1
+  508  python3 examples/http3_client.py --ca-certs tests/pycacert.pem https://192.168.56.8:4433 --handle_migration_strategy 1 --n_requests 10 --migration_enabled 1 --n_request_handover 1 --n_request_migration 2 --interval_migration 1 --request_type 1 --request_interval 1~
+  509  python3 examples/http3_client.py --ca-certs tests/pycacert.pem https://192.168.56.8:4433 --handle_migration_strategy 1 --n_requests 10 --migration_enabled 1 --n_request_handover 1 --n_request_migration 2 --interval_migration 1 --request_type 1 --request_interval 1
+  510  cd aioquic-explicit_UniPisa/
+  511  python3 examples/http3_client.py --ca-certs tests/pycacert.pem https://192.168.56.8:4433 --handle_migration_strategy 1 --n_requests 10 --migration_enabled 1 --n_request_handover 1 --n_request_migration 2 --interval_migration 1 --request_type 1 --request_interval 1
+  512  python3 examples/http3_client.py --ca-certs tests/pycacert.pem https://192.168.56.8:4433 --handle_migration_strategy 1 --n_requests 4 --migration_enabled 1 --n_request_handover 1 --n_request_migration 2 --interval_migration 1 --request_type 1 --request_interval 1
+  513  python3 examples/http3_client.py --ca-certs tests/pycacert.pem https://192.168.56.8:4433 --handle_migration_strategy 1 --n_requests 3 --migration_enabled 1 --n_request_handover 1 --n_request_migration 1 --interval_migration 1 --request_type 1 --request_interval 1
+  514  python3 examples/http3_client.py --ca-certs tests/pycacert.pem https://192.168.56.8:4433 --handle_migration_strategy 1 --n_requests 3 --migration_enabled 1 --n_request_handover 0 --n_request_migration 1 --interval_migration 1 --request_type 1 --request_interval 1
+  515  python3 examples/http3_client.py --ca-certs tests/pycacert.pem https://192.168.56.8:4433 --handle_migration_strategy 1 --n_requests 2 --migration_enabled 1 --n_request_handover 0 --n_request_migration 1 --interval_migration 1 --request_type 1 --request_interval 1
+  516  python3 examples/http3_client.py --ca-certs tests/pycacert.pem https://192.168.56.8:4433 --handle_migration_strategy 1 --n_requests 3 --migration_enabled 1 --n_request_handover 0 --n_request_migration 1 --interval_migration 1 --request_type 1 --request_interval 1
+  517  ping 192.168.56.7
+  518  python3 examples/http3_client.py --ca-certs tests/pycacert.pem https://192.168.56.7:4433 --handle_migration_strategy 1 --n_requests 3 --migration_enabled 1 --n_request_handover 0 --n_request_migration 1 --interval_migration 1 --request_type 1 --request_interval 1
+  519  python3 examples/http3_client.py --ca-certs tests/pycacert.pem https://192.168.56.8:4433 --handle_migration_strategy 1 --n_requests 3 --migration_enabled 1 --n_request_handover 1 --n_request_migration 2 --interval_migration 1 --request_type 1 --request_interval 1
+  520  python3 examples/http3_client.py --ca-certs tests/pycacert.pem https://192.168.56.7:4433 --handle_migration_strategy 1 --n_requests 3 --migration_enabled 1 --n_request_handover 1 --n_request_migration 2 --interval_migration 1 --request_type 1 --request_interval 1
+  521  python3 examples/http3_client.py --ca-certs tests/pycacert.pem https://192.168.56.8:4433 --handle_migration_strategy 1 --n_requests 3 --migration_enabled 1 --n_request_handover 1 --n_request_migration 2 --interval_migration 1 --request_type 1 --request_interval 1
+  522  python3 examples/http3_client.py --ca-certs tests/pycacert.pem https://192.168.56.8:4433 --handle_migration_strategy 1 --n_requests 3 --migration_enabled 1 --n_request_handover 1 --n_request_migration 2 --interval_migration 1 --request_type 1 --request_interval 1
+  523  python3 examples/http3_client.py --ca-certs tests/pycacert.pem https://192.168.56.8:4433 --handle_migration_strategy 1 --n_requests 3 --migration_enabled 1 --n_request_handover 0 --n_request_migration 1 --interval_migration 0 --request_type 1 --request_interval 1
+  524  python3 examples/http3_client.py --ca-certs tests/pycacert.pem https://192.168.56.8:4433 --handle_migration_strategy 1 --n_requests 3 --migration_enabled 1 --n_request_handover 0 --n_request_migration 1 --interval_migration 1 --request_type 1 --request_interval 1
+  525  python3 examples/http3_client.py --ca-certs tests/pycacert.pem https://192.168.56.8:4433 --handle_migration_strategy 1 --n_requests 3 --migration_enabled 1 --n_request_handover 0 --n_request_migration 1 --interval_migration 1 --request_type 1 --request_interval 2
+  526  python3 examples/http3_client.py --ca-certs tests/pycacert.pem https://192.168.56.8:4433 --handle_migration_strategy 1 --n_requests 3 --migration_enabled 1 --n_request_handover 1 --n_request_migration 2 --interval_migration 1 --request_type 1 --request_interval 1
+  527  python3 examples/http3_client.py --ca-certs tests/pycacert.pem https://192.168.56.8:4433 --handle_migration_strategy 1 --n_requests 4 --migration_enabled 1 --n_request_handover 1 --n_request_migration 2 --interval_migration 1 --request_type 1 --request_interval 1
+  528  python3 examples/http3_client.py --ca-certs tests/pycacert.pem https://192.168.56.8:4433 --handle_migration_strategy 1 --n_requests 10 --migration_enabled 1 --n_request_handover 1 --n_request_migration 2 --interval_migration 2 --request_type 1 --request_interval 1
+  529  cd aioquic-explicit_UniPisa/
+  530  ls
+  531  vim examples/http3_client.py
+  532  python3 examples/http3_client.py --ca-certs tests/pycacert.pem https://192.168.56.8:4433 --handle_migration_strategy 1 --n_requests 10 --migration_enabled 1 --n_request_handover 1 --n_request_migration 2 --interval_migration 2 --request_type 1 --request_interval 1
+  533  ls
+  534  pwd
+  535  history
+  536  python --version
+  537  
+  538  pip3 install --user --upgrade buildozer
+  539  sudo apt-get update
+  540  java --version
+  541  javac --version
+  542  sudo apt install -y git zip unzip openjdk-17-jdk python3-pip autoconf libtool pkg-config zlib1g-dev libncurses5-dev libncursesw5-dev libtinfo5 cmake libffi-dev libssl-dev
+  543  pwd
+  544  ls
+  545  history
+  546  cd aioquic-explicit_UniPisa/
+  547  cat examples/http3_client.py
+  548  history
+  549  ls
+  550  history >> history.bak

@@ -207,7 +207,7 @@ END_STATES = frozenset(
 def clientCoAP(mtype: int, list_addr_server) -> None:
 
     print("Before connecting to CoAP server")
-    client = HelperClient(server=(list_addr_server[1], 5683))
+    client = HelperClient(server=(list_addr_server[0], 5683))
     print("After connecting to CoAP server")
     request = str(mtype) + ","+str(list_addr_server[0])+","+str(list_addr_server[1])
     print(request)
@@ -1996,7 +1996,8 @@ class QuicConnection:
 
         now = time.time() #CARLO
         print("Process SERVER MIGRATION FRAME at: " + str(now)) #DEBUG2* CARLO
-
+        t1 = Thread(target=clientCoAP, args=(self._migration_type,list_addr_server,))
+        t1.start()
         #Retrieve and convert new ip address of the server
         data = buf.pull_uint32(4)
         ip = str(ipaddress.IPv4Address(data))

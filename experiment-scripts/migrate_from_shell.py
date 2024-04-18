@@ -27,11 +27,14 @@ def prepare(image_path, parent_path):
 
 def pre_dump(base_path, container):
     old_cwd = os.getcwd()
+    print("old_cwd " + old_cwd)
+
     os.chdir(base_path)
     cmd = 'time -p runc checkpoint  --pre-dump --image-path parent'
     cmd += ' ' + container
     start = time.time()
     print ("Starting checkpointing pre-dump at: %f" % (start) )
+    print(cmd)
     ret = os.system(cmd)
     #end = time.time()
     #print "%s finished after %d second(s) with %d" % (cmd, end - start, ret)
@@ -41,6 +44,7 @@ def pre_dump(base_path, container):
 
 def real_dump(precopy, postcopy):
     old_cwd = os.getcwd()
+    print("old_cwd " + old_cwd)
     os.chdir(base_path)
     cmd = 'time -p runc checkpoint --image-path image --leave-running'
     cmd = 'time -p runc checkpoint --image-path image '
@@ -79,10 +83,12 @@ def xfer_pre_dump(parent_path, dest, base_path):
     sys.stdout.write('PRE-DUMP size: ')
     sys.stdout.flush()
     cmd = 'du -hs %s' % parent_path
+    print("cmd: "+ cmd)
     ret = os.system(cmd)
     cmd = 'time -p rsync %s --stats %s %s:%s/' % (rsync_opts, parent_path, dest, base_path)
     print ("Transferring PRE-DUMP to %s" % dest)
     #start = time.time()
+    print("cmd: " + cmd)
     ret = os.system(cmd)
     #end = time.time()
     #print "PRE-DUMP transfer time %s seconds" % (end - start)
@@ -93,10 +99,14 @@ def xfer_final(image_path, dest, base_path):
     sys.stdout.write('DUMP size: ')
     sys.stdout.flush()
     cmd = 'du -hs %s' % image_path
+    print("cmd: " + cmd)
     ret = os.system(cmd)
+
     cmd = 'time -p rsync %s --stats %s %s:%s/' % (rsync_opts, image_path, dest, base_path)
     print ("Transferring DUMP to %s" % dest)
     #start = time.time()
+    print("cmd: " + cmd)
+
     ret = os.system(cmd)
     #end = time.time()
     #print "DUMP transfer time %s seconds" % (end - start)
@@ -133,8 +143,9 @@ def migrate(container, dest, pre, lazy):
 
     input = [cs,sys.stdin]
 
-
-    cs.send('{ "restore" : { "path" : "' + base_path + '", "name" : "' + container + '" , "image_path" : "' + image_path + '" , "lazy" : "' + str(lazy) + '" } }')
+    cmd = '{ "restore" : { "path" : "' + base_path + '", "name" : "' + container + '" , "image_path" : "' + image_path + '" , "lazy" : "' + str(lazy) + '" } }'
+    print('cmd: ' + cmd)
+    cs.send(cmd)
 
     while True:
         inputready, outputready, exceptready = select.select(input,[],[], 5)
