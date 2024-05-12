@@ -24,9 +24,12 @@ examples/templates/index.html
 examples/templates/logs.html
 src/aioquic/__init__.py
 src/aioquic/_buffer.c
+src/aioquic/_buffer.pyi
 src/aioquic/_crypto.c
+src/aioquic/_crypto.pyi
 src/aioquic/about.py
 src/aioquic/buffer.py
+src/aioquic/py.typed
 src/aioquic/tls.py
 src/aioquic.egg-info/PKG-INFO
 src/aioquic.egg-info/SOURCES.txt

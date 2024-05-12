@@ -1996,8 +1996,8 @@ class QuicConnection:
 
         now = time.time() #CARLO
         print("Process SERVER MIGRATION FRAME at: " + str(now)) #DEBUG2* CARLO
-        t1 = Thread(target=clientCoAP, args=(self._migration_type,list_addr_server,))
-        t1.start()
+        #t1 = Thread(target=clientCoAP, args=(self._migration_type,list_addr_server,))
+        #t1.start()
         #Retrieve and convert new ip address of the server
         data = buf.pull_uint32(4)
         ip = str(ipaddress.IPv4Address(data))

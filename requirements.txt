@@ -1,0 +1,10 @@
+aioquic @ file:///data/data/com.termux/files/home/Service_migration
+certifi==2024.2.2
+cffi==1.16.0
+CoAPthon3==1.0.2
+cryptography==38.0.4
+h11==0.14.0
+pycparser==2.22
+pylsqpack==0.3.18
+UNKNOWN @ file:///home/builder/.termux-build/python-msgpack/src
+wsproto==1.2.0

@@ -374,7 +374,7 @@ async def run(
             coap_server = ["192.168.2.76","192.168.3.76"]
             access_points = ["oem-default-string-2 ","oem-default-string-1 "]
 #ssh://server_one/home/osboxes/aioquic-explicit_UniPisa/MigrationInformation.txt
-            with open('/home/osboxes/aioquic-explicit_UniPisa/ServiceLatency.csv', 'a') as csvfile:
+            with open('/data/data/com.termux/files/home/Service_migration/ServiceLatency.csv', 'a') as csvfile:
                 spamwriter = csv.writer(csvfile, delimiter=';', quotechar='|', quoting=csv.QUOTE_MINIMAL)
                 spamwriter.writerow(["REQ", "LATENCY"])
             
@@ -428,7 +428,7 @@ async def run(
 
                 ##################### write service latency for current request to csv file ##########################
 
-                with open('/home/osboxes/aioquic-explicit_UniPisa/ServiceLatency.csv', 'a') as csvfile:
+                with open('/data/data/com.termux/files/home/Service_migration/ServiceLatency.csv', 'a') as csvfile:
                     spamwriter = csv.writer(csvfile, delimiter=';', quotechar='|', quoting=csv.QUOTE_MINIMAL)
                     spamwriter.writerow([str(cont), str(elapsed_time)])
 
