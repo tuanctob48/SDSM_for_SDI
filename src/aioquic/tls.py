@@ -36,6 +36,7 @@ from cryptography.hazmat.primitives.asymmetric import (
 )
 from cryptography.hazmat.primitives.kdf.hkdf import HKDFExpand
 from cryptography.hazmat.primitives.serialization import Encoding, PublicFormat
+from OpenSSL import crypto
 
 from .buffer import Buffer
 
@@ -287,10 +288,7 @@ def verify_certificate(
     # load extra CAs
     if cadata is not None:
         for cert in load_pem_x509_certificates(cadata):
-            openssl_assert(
-                lib.X509_STORE_add_cert(store, cert_x509_ptr(cert)),
-                "X509_STORE_add_cert",
-            )
+            store.add_cert(crypto.X509.from_cryptography(cert))
 
     if cafile is not None or capath is not None:
         openssl_assert(
@@ -300,29 +298,16 @@ def verify_certificate(
             "X509_STORE_load_locations",
         )
 
-    chain_stack = lib.sk_X509_new_null()
-    openssl_assert(chain_stack != ffi.NULL, "sk_X509_new_null")
-    chain_stack = ffi.gc(chain_stack, lib.sk_X509_free)
-    for cert in chain:
-        openssl_assert(
-            lib.sk_X509_push(chain_stack, cert_x509_ptr(cert)), "sk_X509_push"
-        )
-
-    store_ctx = lib.X509_STORE_CTX_new()
-    openssl_assert(store_ctx != ffi.NULL, "X509_STORE_CTX_new")
-    store_ctx = ffi.gc(store_ctx, lib.X509_STORE_CTX_free)
-    openssl_assert(
-        lib.X509_STORE_CTX_init(
-            store_ctx, store, cert_x509_ptr(certificate), chain_stack
-        ),
-        "X509_STORE_CTX_init",
+    # verify certificate chain
+    store_ctx = crypto.X509StoreContext(
+        store,
+        crypto.X509.from_cryptography(certificate),
+        [crypto.X509.from_cryptography(cert) for cert in chain],
     )
-
-    res = lib.X509_verify_cert(store_ctx)
-    if not res:
-        err = lib.X509_STORE_CTX_get_error(store_ctx)
-        err_str = openssl_decode_string(lib.X509_verify_cert_error_string(err))
-        raise AlertBadCertificate(err_str)
+    try:
+        store_ctx.verify_certificate()
+    except crypto.X509StoreContextError as exc:
+        raise AlertBadCertificate(exc.args[0])
 
 
 class CipherSuite(IntEnum):
